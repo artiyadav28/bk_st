@@ -415,8 +415,10 @@ app.use(function (err,req,res,next){
     if(!err.status) err.status=500;
     res.status(status).render('error',{err});
 });
-app.listen(3000,()=>{
-    console.log('Listening on port 3000!');
+
+const port= process.env.PORT || 3000;
+app.listen(port,()=>{
+    console.log(`Listening on port ${port}!`);
 })
 
 //next() doesnt necessarily stop the execution of that middleware .it is going to call the next middleware but
@@ -428,8 +430,3 @@ client-side validation(html form) - checks if field is not empty. and gives feed
 server-side validation (joi schema)- validates req.body before even sending data to mongoose
 server-side validation (monoose)- mongoose schema k andar jo validations likhte h
 */
-
-//image sizing and pagination
-//error handling check
-//ui
-//hosting
