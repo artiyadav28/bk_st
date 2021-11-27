@@ -230,7 +230,7 @@ app.post('/addMoney',isLoggedIn,wrapAsync(async (req,res)=>{
     if(money<0||money>10000){
         req.flash("error","Please add money in the reasonable range.");
         res.redirect('/eWallet');
-    }
+    }else{
     const user=await User.findById(req.user._id);
     const config={
         price:money,
@@ -243,6 +243,7 @@ app.post('/addMoney',isLoggedIn,wrapAsync(async (req,res)=>{
     user.transaction.unshift(newTransaction._id);
     await user.save();
     res.redirect('/eWallet');
+    }
 }))
 app.post('/products/:id/transaction',isPossile,wrapAsync(async(req,res)=>{
     const {id}=req.params;
