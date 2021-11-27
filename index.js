@@ -226,6 +226,10 @@ app.get('/eWallet',isLoggedIn,wrapAsync(async(req,res)=>{
 }))
 app.post('/addMoney',isLoggedIn,wrapAsync(async (req,res)=>{
     let {money}=req.body;
+    if(money<0||money>10000){
+        req.flash("error","Please add money in the reasonable range.");
+        res.redirect('/eWallet');
+    }
     money=Number(money);
     const user=await User.findById(req.user._id);
     const config={
